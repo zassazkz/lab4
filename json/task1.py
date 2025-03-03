@@ -1,27 +1,19 @@
-import json 
+import json
 
-with open("/Users/aliaskarmussin/Desktop/PP2-spring-2025/lab4/json/sample-data.json", "r") as file:
+data = open('sample.json').read()
+object = json.loads(data)
 
-    data = json.load(file)
+print("=======================================================================================")
+print(f"{'DN':<50} {'Description':<20} {'Speed':<10} {'MTU':<6}")
+print("-------------------------------------------------- --------------------  ------  ------")
 
-print("Interface Status")
+data = object.get("imdata", [])
 
-print("=" * 80)
+for i in data:
+    l1_Phys_If = i.get('l1PhysIf', {}).get('attributes', {})
+    dn = l1_Phys_If.get('dn', '')
+    desc = l1_Phys_If.get('descr', '')
+    speed = l1_Phys_If.get('speed', '')
+    mtu = l1_Phys_If.get('mtu', '')
 
-print(f"{'DN':<50} {'Description':<20} {'Speed':<8} {'MTU':<6}")
-
-print("-" * 80)
-
-for item in data["imdata"]:
-
-    attributes = item["l1PhysIf"]["attributes"]
-
-    dn = attributes["dn"]
-
-    description = attributes["descr"] if attributes["descr"] else ""
-
-    speed = attributes["speed"]
-
-    mtu = attributes["mtu"]
-
-    print(f"{dn:<50} {description:<20} {speed:<8} {mtu:<6}")
+    print(f"{dn:<50}{desc:<20}{speed:<10}{mtu:<6}")
