@@ -1,6 +1,7 @@
 import json
 
-data = open('sample.json').read()
+data = open(r'C:\Users\zassa\Documents\GitHub\lab4\json\sample.json').read()
+
 object = json.loads(data)
 
 print("=======================================================================================")
